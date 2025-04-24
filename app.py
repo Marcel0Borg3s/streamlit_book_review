@@ -17,7 +17,7 @@ price_range = st.sidebar.slider(
     step=0.1
 )
 
-st.sidebar.markdown(f"**Preço selecionado:** de ${price_min:.2f} até ${price_max:.2f}")
+st.sidebar.markdown(f"**Preço selecionado: de ${price_min:.2f} até $ {price_max:.2f}**")
 
 # Slider de rating
 rating_max = float(def_top100_books["rating"].max())
@@ -37,7 +37,27 @@ df_books = def_top100_books[
     (def_top100_books["rating"] >= rating_range[0]) &
     (def_top100_books["rating"] <= rating_range[1])
 ]
+
 st.dataframe(df_books)
+
+# Cria um DataFrame com contagem por ano
+df_count = df_books['year of publication'].value_counts().reset_index()
+df_count.columns = ['year', 'count']
+
+# Cria o gráfico
+fig = px.bar(df_count, x='year', y='count', title='Livros por Ano de Publicação')
+
+
+fig2 = px.histogram(df_books["book price"], title="Preços dos Livros")
+
+
+# Mostra no Streamlit
+col1, col2 = st.columns(2)
+with col1:
+    st.plotly_chart(fig)
+with col2:
+    st.plotly_chart(fig2)
+
 
 
 
