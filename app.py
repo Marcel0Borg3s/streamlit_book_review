@@ -5,8 +5,8 @@ import plotly.express as px
 
 st.set_page_config(layout="wide") #deixar a config da tela em full screen
 
-df_reviews = pd.read_csv(r"E:\Programer\Python\Projetos\Asimov_v0\Streamlit\Assets\customer reviews.csv")
-def_top100_books = pd.read_csv(r"E:\Programer\Python\Projetos\Asimov_v0\Streamlit\Assets\Top-100 Trending Books.csv")
+df_reviews = pd.read_csv("Assets/customer reviews.csv")
+def_top100_books = pd.read_csv("Assets/Top-100 Trending Books.csv")
 
 # Slider de preço
 price_max = float(def_top100_books["book price"].max())
